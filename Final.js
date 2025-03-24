@@ -73,6 +73,7 @@ backEsterButton.addEventListener('click', () => {
     backEster()
 })
 
+// Creates a button to enter the quiz
 const questionButton = document.createElement('button');
 questionButton.textContent = "Take the Quiz!";
 questionButton.addEventListener('click', () => {
@@ -88,15 +89,44 @@ var optionOne = document.createElement('button');
 var optionTwo = document.createElement('button');
 var optionThree = document.createElement('button');
 // Variables for the quiz
-var score = 0
-var streak = 0
-var shekel = 0
+var score = 0;
+var streak = 0;
+var shekel = 0;
+var travels = false;
+var lifestyle = false;
+var language = false;
 
 
-
-// Function to enter the main screen from the Kabede screen
+// Function to enter the main screen from the Kabede screen clear all elements not on the main screen
 function backKabede() {
     clearScreen()
+    if (document.body.contains(backEsterButton)) {
+        document.body.removeChild(backEsterButton);
+    }
+    if (document.body.contains(questionButton)) {
+        document.body.removeChild(questionButton);
+    }
+    if (document.body.contains(optionOne)) {
+        document.body.removeChild(optionOne);
+    }
+    if (document.body.contains(optionTwo)) {
+        document.body.removeChild(optionTwo);
+    }
+    if (document.body.contains(optionThree)) {
+        document.body.removeChild(optionThree);
+    }
+    if (document.body.contains(question)) {
+        document.body.removeChild(question);
+    }
+    if (document.body.contains(answerA)) {
+        document.body.removeChild(answerA);
+    }
+    if (document.body.contains(answerB)) {
+        document.body.removeChild(answerB);
+    }
+    if (document.body.contains(answerC)) {
+        document.body.removeChild(answerC); //This segment was helped by chatGPT
+    }
     explainBox.textContent = '';
     document.body.removeChild(backKabedeButton);
     document.body.removeChild(recipeButton);
@@ -106,9 +136,36 @@ function backKabede() {
     document.body.appendChild(kabedeButton);
 }
 
-// Function to enter the main screen from the Sam screen
+// Function to enter the main screen from the Sam screen clear all elements not on the main screen
 function backSam() {
     clearScreen()
+    if (document.body.contains(backEsterButton)) {
+        document.body.removeChild(backEsterButton);
+    }
+    if (document.body.contains(questionButton)) {
+        document.body.removeChild(questionButton);
+    }
+    if (document.body.contains(optionOne)) {
+        document.body.removeChild(optionOne);
+    }
+    if (document.body.contains(optionTwo)) {
+        document.body.removeChild(optionTwo);
+    }
+    if (document.body.contains(optionThree)) {
+        document.body.removeChild(optionThree);
+    }
+    if (document.body.contains(question)) {
+        document.body.removeChild(question);
+    }
+    if (document.body.contains(answerA)) {
+        document.body.removeChild(answerA);
+    }
+    if (document.body.contains(answerB)) {
+        document.body.removeChild(answerB);
+    }
+    if (document.body.contains(answerC)) {
+        document.body.removeChild(answerC); //This segment was helped by chatGPT
+    }
     explainBox.textContent = '';
     document.body.removeChild(backSamButton);
     document.body.removeChild(danceButton);
@@ -118,7 +175,7 @@ function backSam() {
     document.body.appendChild(kabedeButton);
 }
 
-// Function to enter the main screen from the Esther screen
+// Function to enter the main screen from the Esther screen and clear all elements not on the main screen
 function backEster() {
     clearScreen()
     if (document.body.contains(backEsterButton)) {
@@ -153,6 +210,10 @@ function backEster() {
     document.body.appendChild(samButton);
     document.body.appendChild(esterButton);
     document.body.appendChild(kabedeButton);
+    questionButton.disabled = false;
+    travels = false;
+    lifestyle = false;
+    language = false;
 }
 
 // Function to enter the Sam screen
@@ -177,6 +238,7 @@ function kabede() {
     document.body.appendChild(recipeButton);
 }
 
+// Function to enter the Esther screen
 function ester() {
     clearScreen()
     document.body.removeChild(samButton);
@@ -351,6 +413,7 @@ function recipe11() {
     document.addEventListener('keydown', continueRecipe11);
 }
 
+// Function to remove all event listeners
 function removeEventListeners() {
     document.removeEventListener('keydown', continueRecipe0);
     document.removeEventListener('keydown', continueRecipe1);
@@ -375,6 +438,8 @@ function removeEventListeners() {
 }
 
 //______________________________________________________________________________________________________
+
+// Intitalizes the variables needed for the dance game
 let keyNumber;
 let droppingKey;
 let points = 0;
@@ -596,17 +661,27 @@ explainBox.textContent = "Alright, altogether now!";
 document.addEventListener('keydown', continue4);
 }
 
+// Ends the learning mode
 function learningEnd() {
 explainBox.textContent = "Thanks for Learning with me!";
 document.addEventListener('keydown', continue5);
 }
 
+// Clears the textbox
 function learningClear() {
     explainBox.textContent = '';
 }
 
 //______________________________________________________
 
+// Disables the answer buttons
+function disableAnswers() {
+    answerA.disabled = true
+    answerB.disabled = true
+    answerC.disabled = true
+}
+
+// Starts the quiz and asks the first question
 function questionOne() {
     document.body.appendChild(question);
     document.body.appendChild(answerA);
@@ -620,23 +695,28 @@ function questionOne() {
     answerB.textContent = "Angel Island"
     answerC.textContent = "Southern Border"
     answerA.addEventListener('click', function() {
-        score++
-        streak++
+        score += 1
+        streak += 1
         question.textContent = "Correct!"
+        disableAnswers()
         setTimeout(function() { questionTwo(); }, 1000);
     })
     answerB.addEventListener('click', function() {
         streak = 0
         question.textContent = "Incorrect! Esther entered through Ellis Island."
+        disableAnswers()
         setTimeout(function() { questionTwo(); }, 1000);
     })
     answerC.addEventListener('click', function() {
         streak = 0
         question.textContent = "Incorrect! Esther entered through Ellis Island."
+        disableAnswers()
         setTimeout(function() { questionTwo(); }, 1000);
     })
+    questionButton.disabled = true;
 }
 
+// Asks the second question
 function questionTwo() {
     question.textContent = "What is a central street to Jewish life??"
     answerA.textContent = "Mulberry Street"
@@ -646,32 +726,27 @@ function questionTwo() {
     answerB.disabled = false
     answerC.disabled = false
     answerC.addEventListener('click', function() {
-        score++
-        streak++
+        score += 1
+        streak += 1
         question.textContent = "Correct!"
-        answerA.disabled = true
-        answerB.disabled = true
-        answerC.disabled = true
+        disableAnswers()
         setTimeout(function() { questionThree(); }, 1000);
     })
     answerB.addEventListener('click', function() {
         streak = 0
         question.textContent = "Incorrect! Hester Street is a center of Jewish life."
-        answerA.disabled = true
-        answerB.disabled = true
-        answerC.disabled = true
+        disableAnswers()
         setTimeout(function() { questionThree(); }, 1000);
     })
     answerA.addEventListener('click', function() {
         streak = 0
         question.textContent = "Incorrect! Hester Street is a center of Jewish life."
-        answerA.disabled = true
-        answerB.disabled = true
-        answerC.disabled = true
+        disableAnswers()
         setTimeout(function() { questionThree(); }, 1000);
     })
 }
 
+// Asks the third question and ends the quiz
 function questionThree() {
     question.textContent = "What is the Yiddish word for complain?"
     answerA.textContent = "Fietz"
@@ -681,41 +756,35 @@ function questionThree() {
     answerB.disabled = false
     answerC.disabled = false
     answerB.addEventListener('click', function() {
-        score++
-        streak++
+        score += 1
+        streak += 1
         question.textContent = "Correct!"
-        answerA.disabled = true
-        answerB.disabled = true
-        answerC.disabled = true
+        disableAnswers()
         setTimeout(function() { questionsEnd(); }, 1000);
     })
     answerC.addEventListener('click', function() {
         streak = 0
         question.textContent = "Incorrect! Kvetch is the Yiddish word for complain."
-        answerA.disabled = true
-        answerB.disabled = true
-        answerC.disabled = true
+        disableAnswers()
         setTimeout(function() { questionsEnd(); }, 1000);
     })
     answerA.addEventListener('click', function() {
         streak = 0
         question.textContent = "Incorrect! Kvetch is the Yiddish word for complain."
-        answerA.disabled = true
-        answerB.disabled = true
-        answerC.disabled = true
+        disableAnswers()
         setTimeout(function() { questionsEnd(); }, 1000);
     })
 }
 
+// Ends the quiz and displays the score
 function questionsEnd() {
     shekel += score * 10
     question.textContent = "You have finished the quiz! Your score is " + score + " out of 3. You earned " + shekel + " shekels.";
-    answerA.disabled = true
-    answerB.disabled = true
-    answerC.disabled = true
+    disableAnswers()
     setTimeout(function() { convo(); }, 1000);
 }
 
+// Function to start the conversation with Esther
 function convo() {
     if (document.body.contains(question)) {
         document.body.removeChild(question);
@@ -740,12 +809,14 @@ function convo() {
 }
 }
 
+// Function to move the conversation along
 function continueConvo(event) {
     if (event.key == ' ') {
         convo1()
     }
 }
 
+// Main part of conversation with Esther
 function convo1() {
     document.body.appendChild(explainBox);
     document.body.appendChild(optionOne);
@@ -758,28 +829,41 @@ function convo1() {
     optionOne.addEventListener('click', function() { journey(); });
     optionTwo.addEventListener('click', function() {life(); });
     optionThree.addEventListener('click', function() {lang(); });
+    if (travels === true && lifestyle === true && language === true) {
+        explainBox.textContent = "Thank you for listening to my story. I hope you learned something new!";
+        optionOne.textContent = "Back";
+        optionOne.addEventListener('click', function() { backEster(); });
+        optionTwo.textContent = "";
+        optionThree.textContent = "";
+    }
 }
 
+// Esther's response 1
 function journey() {
     optionOne.textContent = "Back";
     optionOne.addEventListener('click', function() { convo1(); });
     optionTwo.textContent = "";
     optionThree.textContent = ""; 
     explainBox.textContent = "It took my family a long time to save up money and buy tickets for our voyage. Between passports and visas and all of the permissions, it’s difficult for Jews in Europe to travel right now. We came into America through Ellis Island, which is a port of New York City. It was a long journey, but we were so excited to finally be here.";
+    travels = true;
 }
 
+// Esther's response 2
 function life() {
     optionOne.textContent = "Back";
     optionOne.addEventListener('click', function() { convo1(); });
     optionTwo.textContent = "";
     optionThree.textContent = ""; 
     explainBox.textContent = "My life is much better now. I have a job and a place to live, and I am able to send money back to my family in Europe. We live near Hester Street, which is a center of Jewish life in New York City.";
+    lifestyle = true;
 }
 
+// Esther's response 3
 function lang() {
     optionOne.textContent = "Back";
     optionOne.addEventListener('click', function() { convo1(); });
     optionTwo.textContent = "";
     optionThree.textContent = ""; 
     explainBox.textContent = "Sure thing! Yiddish is a combination of Hebrew and German. Some of our common phrases are “Nosh,” which means to snack, “Schlep,” which means to carry something heavy, and “kvetch,” which means to complain. Next time your parents say you’re complaining, say you’re actually kvetching.";
+    language = true;
 }
