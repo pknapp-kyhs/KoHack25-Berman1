@@ -1,4 +1,4 @@
-// Username requirement
+// Username requirement 
 let textbox = document.createElement('input');
 document.body.appendChild(textbox);
 textbox.style.display = "block";
@@ -155,6 +155,7 @@ submit.addEventListener('click', function() {
         // Function to enter the main screen from the Sam screen clear all elements not on the main screen
         function backSam() {
             clearScreen()
+            document.removeEventListener('keydown', congrats)
             if (document.body.contains(backEsterButton)) {
                 document.body.removeChild(backEsterButton);
             }
@@ -194,6 +195,7 @@ submit.addEventListener('click', function() {
         // Function to enter the main screen from the Esther screen and clear all elements not on the main screen
         function backEster() {
             clearScreen()
+            document.removeEventListener('keydown', continueConvo)
             if (document.body.contains(backEsterButton)) {
                 document.body.removeChild(backEsterButton);
             }
@@ -513,13 +515,9 @@ submit.addEventListener('click', function() {
         // Function to end the game
         function endgame() {
             document.removeEventListener('keydown', checkKey);
-            display.textContent = "Game Over! Press Space to continue";
+            display.textContent = "Game Over! Press any key to continue";
             clearInterval(interval)
-            document.addEventListener('keydown', function(event) {
-            if (event.key == ' ') {
-                congrats();
-            }
-        })
+            document.addEventListener('keydown', congrats) 
         }
 
         function keySelect() { 
