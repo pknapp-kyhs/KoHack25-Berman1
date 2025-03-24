@@ -1,3 +1,4 @@
+//creating the elements for the quiz
 question = document.createElement('output');
 answerA = document.createElement('button');
 answerB = document.createElement('button');
@@ -7,18 +8,19 @@ document.body.appendChild(question);
 document.body.appendChild(answerA);
 document.body.appendChild(answerB);
 document.body.appendChild(answerC);
-
+//creating variables for score, streak, and shekels (shekels are the currency of the game)
 var score = 0
 var streak = 0
 var shekel = 0
 
 questionOne()
-
+//function to create the first question
 function questionOne() {
     question.textContent = "Where did Esther enter America?"
     answerA.textContent = "Ellis Island"
     answerB.textContent = "Angel Island"
     answerC.textContent = "Southern Border"
+    ///making the buttons clickable
     answerA.addEventListener('click', function() {
         score++
         streak++
@@ -36,7 +38,7 @@ function questionOne() {
         setTimeout(function() { questionTwo(); }, 1000);
     })
 }
-
+//function to create the second question
 function questionTwo() {
     question.textContent = "What is a central street to Jewish life??"
     answerA.textContent = "Mulberry Street"
@@ -71,7 +73,7 @@ function questionTwo() {
         setTimeout(function() { questionThree(); }, 1000);
     })
 }
-
+//function to create the third question
 function questionThree() {
     question.textContent = "What is the Yiddish word for complain?"
     answerA.textContent = "Fietz"
@@ -106,7 +108,7 @@ function questionThree() {
         setTimeout(function() { questionsEnd(); }, 1000);
     })
 }
-
+///function to end the quiz and display the score, plus how many shekels were earned
 function questionsEnd() {
     shekel += score * 10
     question.textContent = "You have finished the quiz! Your score is " + score + " out of 3. You earned " + shekel + " shekels.";
