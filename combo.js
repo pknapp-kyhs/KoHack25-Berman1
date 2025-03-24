@@ -12,25 +12,42 @@ kabedeButton.addEventListener('click', () => {
     kabede()
 })
 
-const kabedeButton = document.createElement('button');
-kabedeButton.textContent = "Back";
-kabedeButton.addEventListener('click', () => {
-    back()
+const backKabedeButton = document.createElement('button');
+backKabedeButton.textContent = "Back";
+backKabedeButton.addEventListener('click', () => {
+    backKabede()
 })
 
-function back() {
+const backSamButton = document.createElement('button');
+backSamButton.textContent = "Back";
+backSamButton.addEventListener('click', () => {
+    backSam()
+})
+
+function backKabede() {
     clearScreen()
-    document.body.removeChild(backButton);
+    explainBox.textContent = '';
+    document.body.removeChild(backKabedeButton);
+    document.body.removeChild(recipeButton);
+    document.body.appendChild(samButton);
+    document.body.appendChild(kabedeButton);
+}
+
+function backSam() {
+    clearScreen()
+    explainBox.textContent = '';
+    document.body.removeChild(backSamButton);
     document.body.removeChild(danceButton);
     document.body.appendChild(samButton);
     document.body.appendChild(kabedeButton);
 }
 
+
 function sam() {
     clearScreen()
     document.body.removeChild(samButton);
     document.body.removeChild(kabedeButton);
-    document.body.appendChild(backButton);
+    document.body.appendChild(backSamButton);
     document.body.appendChild(danceButton);
 }
 
@@ -38,7 +55,7 @@ function kabede() {
     clearScreen()
     document.body.removeChild(samButton);
     document.body.removeChild(kabedeButton);
-    document.body.appendChild(backButton);
+    document.body.appendChild(backKabedeButton);
     document.body.appendChild(recipeButton);
 }
 
